@@ -8,7 +8,8 @@ code.  So I made this to be able to understand how the algorithm works :)
 
 This repository indexes high on code and low on docs.  Briefly, it contains:
 
-* A driver ipython notebook.  You should start here to understand the contents.
+* A driver ipython notebook ``contextual_bandit_sim.ipynb``.  You should start
+  here to understand the contents.
 
 * A data generator.  We initialize hidden contextual variables that are used to
   create synthetic samples.  Let's call this latent contextual variable set ``L``.
