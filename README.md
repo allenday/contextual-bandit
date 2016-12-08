@@ -23,6 +23,6 @@ This repository indexes high on code and low on docs.  Briefly, it contains:
   observations using stratigies ``S`` can be used to update estimates ``M`` to
   converge to the hidden ``L``.
 
-If you find this useful, please share, (retweet)[http://twitter.com/allenday/status/806414167062310912], and follow me on (twitter)[http://twitter.com/allenday]
+If you find this useful, please share, [retweet](http://twitter.com/allenday/status/806414167062310912), and follow me on [twitter](http://twitter.com/allenday).
 
 Have fun!
