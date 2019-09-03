@@ -1,5 +1,8 @@
 import numpy as np
 
+"""
+TODO class description
+"""
 class DataGenerator():
     """
     Generate bandit data.
@@ -8,6 +11,8 @@ class DataGenerator():
     K = number of arms (default 2)
     D = number of features per arm (default 2)
     reward_type = one of: binary, positive, mixed
+
+    TODO constructor description
     """
     def __init__(self,K=2,D=2,feature_type='binary',reward_type='binary'):
         
