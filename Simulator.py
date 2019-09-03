@@ -16,37 +16,36 @@ class Simulator(object):
             for d in range(0,self.D):
                 self.stats[k,d] = ov.OnlineVariance(ddof=0)
 
-    def simulate(self,features,rewards,weights):
-        N = rewards.size/self.K
+    """
+    Simulate results. Takes as input:
 
+    - `features`: observed list of feature vectors
+    - `rewards`: observed list of rewards, corresponding to the feature vectors
+    - `weights`: known true weights of each feature, for each arm. used to calculate regret and rmse
+    """
+    def simulate(self,features,rewards,weights):
+        #figure out how many observations there are
+        N = int(rewards.size/self.K)
+
+        #initialize regret, rmse
         regret = np.zeros((N,1))
         rmse = np.zeros((N,1))
 
         for i in range(0,N):
             F = features[i]
             R = rewards[i]
+
+
+            #identify the TRUE OPTIMAL arm to choose
+            armOptimal = np.argmax(R)
+            armMaxReward = R[armOptimal]
+
+            #choose the best ESTIMATED OPTIMAL arm based on current model
+            armChoices = list(map(lambda x: self.model.estimate(x,F), range(0,self.K)))
+            armChoice = np.argmax(armChoices)
+            armMaxEstimate = armChoices[armChoice]
    
-            #our estimate and corresponding choice
-            armMaxEstimate = 0.
-            armChoice = 0
-
-            #known reward and correct choice
-            armMaxReward = 0.
-            armOptimal = 0
-
-            for k in range(0,self.K):
-                #identify the optimal arm to choose
-                if R[k] > armMaxReward:
-                    armMaxReward = R[k]
-                    armOptimal = k
-
-                #choose an arm with best estimate based on current model
-                armEstimate = self.model.estimate(k,F)
-                if armEstimate > armMaxEstimate:
-                    armMaxEstimate = armEstimate
-                    armChoice = k
-
-            #learn from an arm other than best estimate with p=epsilon
+            #choose an ESTIMATED NON-OPTIMAL arm for the purpose of learning with p=epsilon
             learn = np.random.uniform() <= self.epsilon
             if learn:
                 armAlt = armChoice
