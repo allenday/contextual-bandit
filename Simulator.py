@@ -1,9 +1,13 @@
 import numpy as np
 import OnlineVariance as ov
+"""
+TODO verbose description of class
+"""
 class Simulator(object):
     """
     Simulate model
     epsilon=0.05 learning rate
+    TODO constructor description
     """
     def __init__(self, model, epsilon=0.05):
         self.model = model
@@ -22,6 +26,8 @@ class Simulator(object):
     - `features`: observed list of feature vectors
     - `rewards`: observed list of rewards, corresponding to the feature vectors
     - `weights`: known true weights of each feature, for each arm. used to calculate regret and rmse
+
+    TODO describe output
     """
     def simulate(self,features,rewards,weights):
         #figure out how many observations there are
